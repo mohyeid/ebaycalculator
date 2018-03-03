@@ -1,0 +1,18 @@
+{
+  "manifest_version": 2,
+
+  "name": "Ebay Profit Calculator",
+  "description": "This calculates the ebay fees",
+  "version": "1.0",
+
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "index.html"
+  },
+  "permissions": [
+    "activeTab",
+	"storage",
+    "https://ajax.googleapis.com/"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}
