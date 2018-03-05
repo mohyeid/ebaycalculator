@@ -1,51 +1,86 @@
-<form class="example-form"  [formGroup]="frm"  novalidate>
-  <mat-checkbox  formControlName="taxesIncluded">Taxes Included</mat-checkbox>
-  <div style="display: inline;padding-left: 15px;" *ngIf="!settings.taxesIncluded">
-  <mat-form-field>
-      <input matInput placeholder="Tax (%)"  formControlName="taxes">
-  </mat-form-field>
-</div>
-  <br />
-  <mat-checkbox *ngIf="!item.taxesIncluded" formControlName="taxesOnFinallPrice">Taxes on Final Price</mat-checkbox>
-  <div style="margin-top: 15px;">
-    <mat-divider></mat-divider>
-    <mat-divider></mat-divider>
-    <mat-divider></mat-divider>
+<div class="header">
+    <!-- <div class="colored">
+        <div  class="colored-item colored-item1"></div>
+        <div  class="colored-item colored-item2"></div>
+        <div  class="colored-item colored-item3"></div>
+        <div  class="colored-item colored-item4"></div>
+      </div> -->
+      <div class="header-img">
+          <img src="icon48.png" />
+      </div>
+  
+  <div class="header-text">
+      eBay Profit Calculator
   </div>
+</div>
+<div class="section-header">
+  <i class="icon-cog-alt"></i><b><span>Settings</span></b>
+</div>
+
+<form class="example-form"  [formGroup]="frm"  novalidate>
+  <div class="section">
+    <mat-checkbox  formControlName="taxesIncluded">
+      Taxes Included <i class="icon-question" aria-hidden="true"  matTooltip="Unchek this if you want calculator to add taxes to your item costs"></i>  
+    </mat-checkbox>
+    
+    <div style="display: inline;padding-left: 15px;" *ngIf="!settings.taxesIncluded">
+    <mat-form-field>
+        <input matInput placeholder="Tax (%)" type="number" formControlName="taxes">
+    </mat-form-field>
+  </div>
+    <br />
+    <mat-checkbox *ngIf="!item.taxesIncluded" formControlName="taxesOnFinallPrice">
+        Taxes on Final Price <i class="icon-question" aria-hidden="true"  matTooltip="Some retailers like Costco charge taxes on pre-discounted price. 
+          Check this if you want to calculate taxes in pre-discounted price"></i>  
+    </mat-checkbox>
+  </div>
+  <div class="calc section-header">
+    <i class="icon-calc"></i><span><b>Calculator</b></span>
+  </div>
+  <div class="section">
   <div>
     <mat-form-field>
-      <input matInput [placeholder]="item.taxesOnFinallPrice || item.taxesIncluded? 'Price' : 'Original Price'"  formControlName="price">
+      <input matInput 
+        [placeholder]="item.taxesOnFinallPrice || item.taxesIncluded? 'Price' : 'Original Price'"  
+        type="number" formControlName="price">
     </mat-form-field>
   </div>
   <div *ngIf="!item.taxesOnFinallPrice && !item.taxesIncluded">
     <mat-form-field>
-      <input matInput placeholder="Discounted Price"  formControlName="discountedPrice">
+      <input matInput placeholder="Discounted Price" type="number" formControlName="discountedPrice">
     </mat-form-field>
   </div>
   <div>
     <mat-chip-list  *ngIf="!item.taxesIncluded">
-      <mat-chip disabled>Taxes: </mat-chip>
-      <mat-chip disabled>Final Price: </mat-chip>
+      <mat-chip disabled>Taxes: ${{calculated.taxes | number:'1.2-2'}}</mat-chip>
+      <mat-chip disabled>Final Price:  ${{calculated.finalPrice | number:'1.2-2'}}</mat-chip>
     </mat-chip-list>
   </div>
   <mat-form-field>
-    <input matInput placeholder="Shipping Costs"  formControlName="shipping">
+    <input matInput placeholder="Shipping Costs" type="number" formControlName="shipping">
   </mat-form-field>
   <mat-chip-list>
     <span><b>Fees:</b></span>
-    <mat-chip  color="accent" ><b>Ebay:</b> </mat-chip>
-    <mat-chip  color="accent" ><b>PayPal:</b> </mat-chip>
+    <mat-chip  color="accent" ><b>eBay:</b>  ${{calculated.ebayFees | number:'1.2-2'}}</mat-chip>
+    <mat-chip  color="accent" ><b>PayPal:</b>  ${{calculated.paypalFees | number:'1.2-2'}}</mat-chip>
   </mat-chip-list>
   <br />
-  <div>
-    No Profit Listing: 
+  <div class="result">
+    No Profit Listing:  ${{calculated.suggestedPrice | number:'1.2-2'}}
   </div>
   <mat-form-field>
-      <input matInput placeholder="Ebay Listing Price"  formControlName="listingPrice">
+      <input matInput placeholder="eBay Listing Price" type="number" formControlName="listingPrice">
     </mat-form-field>
     <br />
-    <div>
-      Loss/Gain: 
+  </div>
+    <mat-divider></mat-divider>
+    <mat-divider></mat-divider>
+    <mat-divider></mat-divider>
+    <br />
+    <div class="result">
+      Loss/Gain: <span [ngClass]="{'gain': calculated.lossGain > 0, 'loss': calculated.lossGain < 0}">${{calculated.lossGain | number:'1.2-2'}}</span>
     </div>
+  
+    <br />
+    <br />
 </form>
-

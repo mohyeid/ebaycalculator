@@ -9,10 +9,10 @@
       "outDir": "dist",
       "assets": [
         "assets",
-        "favicon.ico",
         "manifest.json",
-        "icon.ico",
-        "icon.png"
+        "icon16.png",
+        "icon48.png",
+        "icon128.png"
       ],
       "index": "index.html",
       "main": "main.ts",
@@ -22,7 +22,8 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "styles.css",
+        "assets/fontello/css/fontello.css"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",

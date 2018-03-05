@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { CalculatorComponent } from './components/calculator/calculator.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { fontawesome } from 'fontawesome';
 import {
   // MatAutocompleteModule,
   MatButtonModule,

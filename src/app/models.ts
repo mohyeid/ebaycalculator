@@ -1,7 +1,7 @@
 
 export class Settings {
-    public taxesIncluded: boolean = false;
-    public taxes: number = 10;
+    public taxesIncluded: boolean = true;
+    public taxes: number = 10.4;
     taxesOnFinallPrice: boolean = true;
 }
 
